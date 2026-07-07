@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BookRecordsViewController.swift
 //  Bookmarks
 //
 //  Created by Erkhaan  on 04.07.2026.
@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-class ViewController: UIViewController {
+public final class BookRecordsViewController: UIViewController {
 
     private let getBookRecordsUseCase: GetBookRecordsUseCase
 
@@ -16,12 +16,12 @@ class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(getBookRecordsUseCase: GetBookRecordsUseCase) {
+    public init(getBookRecordsUseCase: GetBookRecordsUseCase) {
         self.getBookRecordsUseCase = getBookRecordsUseCase
         super.init(nibName: nil, bundle: nil)
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         getBookRecordsUseCase.execute()

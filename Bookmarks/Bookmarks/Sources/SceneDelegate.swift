@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
-        let rootVC = ViewController(getBookRecordsUseCase: GetBookRecordsUseCaseImpl())
+        let rootVC = BookRecordsAssembly.makeRootViewController()
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
