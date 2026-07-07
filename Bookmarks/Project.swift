@@ -4,20 +4,30 @@ let project = Project(
     name: "Bookmarks",
     targets: [
         .target(
+            name: "Domain",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "dev.tuist.Bookmarks.Domain",
+            buildableFolders: [
+                "Bookmarks/Domain"
+            ],
+            dependencies: []
+        ),
+        .target(
             name: "Bookmarks",
             destinations: .iOS,
             product: .app,
             bundleId: "dev.tuist.Bookmarks",
             infoPlist: .extendingDefault(with: [
                 "UILaunchStoryboardName": "LaunchScreen.storyboard",
-                // ✅ Add this block
                 "UIApplicationSceneManifest": [
                     "UIApplicationSupportsMultipleScenes": false,
                     "UISceneConfigurations": [
                         "UIWindowSceneSessionRoleApplication": [
                             [
                                 "UISceneConfigurationName": "Default Configuration",
-                                "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate",
+                                "UISceneDelegateClassName":
+                                    "$(PRODUCT_MODULE_NAME).SceneDelegate",
                             ]
                         ]
                     ],
@@ -27,7 +37,7 @@ let project = Project(
                 "Bookmarks/Sources",
                 "Bookmarks/Resources",
             ],
-            dependencies: []
+            dependencies: [.target(name: "Domain")]
         ),
         .target(
             name: "BookmarksTests",
