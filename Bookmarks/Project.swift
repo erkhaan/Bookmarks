@@ -4,14 +4,16 @@ let project = Project(
     name: "Bookmarks",
     targets: [
         .target(
-            name: "Domain",
+            name: "Data",
             destinations: .iOS,
             product: .staticFramework,
-            bundleId: "dev.tuist.Bookmarks.Domain",
+            bundleId: "dev.tuist.Bookmarks.Data",
             buildableFolders: [
-                "Bookmarks/Domain"
+                "Bookmarks/Data"
             ],
-            dependencies: []
+            dependencies: [
+                .target(name: "Domain")
+            ]
         ),
         .target(
             name: "Presentation",
@@ -20,6 +22,18 @@ let project = Project(
             bundleId: "dev.tuist.Bookmarks.Presentation",
             buildableFolders: [
                 "Bookmarks/Presentation"
+            ],
+            dependencies: [
+                .target(name: "Domain")
+            ]
+        ),
+        .target(
+            name: "Domain",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "dev.tuist.Bookmarks.Domain",
+            buildableFolders: [
+                "Bookmarks/Domain"
             ],
             dependencies: []
         ),
@@ -50,6 +64,7 @@ let project = Project(
             dependencies: [
                 .target(name: "Domain"),
                 .target(name: "Presentation"),
+                .target(name: "Data"),
             ]
         ),
         .target(

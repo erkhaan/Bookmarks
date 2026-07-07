@@ -1,6 +1,11 @@
 public struct GetBookRecordsUseCaseImpl: GetBookRecordsUseCase {
-    public init() {
 
+    private let repository: BookRecordsRepository
+
+    public init(
+        repository: BookRecordsRepository
+    ) {
+        self.repository = repository
     }
 
     public func execute() {
