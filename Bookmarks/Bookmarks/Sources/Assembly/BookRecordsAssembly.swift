@@ -5,8 +5,13 @@ import UIKit
 
 enum BookRecordsAssembly {
     static func makeRootViewController() -> UIViewController {
-        let repository = BookRecordsRepositoryImpl()
-        let useCase = GetBookRecordsUseCaseImpl(repository: repository)
-        return BookRecordsViewController(getBookRecordsUseCase: useCase)
+        let localDataSource = BookRecordsLocalDataSourceImpl()
+        let repository = BookRecordsRepositoryImpl(localDataSource: localDataSource)
+        let getBookRecordsUseCase = GetBookRecordsUseCaseImpl(repository: repository)
+        let saveBookRecordUseCase = SaveBookRecordUseCaseImpl(repository: repository)
+        return BookRecordsViewController(
+            getBookRecordsUseCase: getBookRecordsUseCase,
+            saveBookRecordUseCase: saveBookRecordUseCase
+        )
     }
 }

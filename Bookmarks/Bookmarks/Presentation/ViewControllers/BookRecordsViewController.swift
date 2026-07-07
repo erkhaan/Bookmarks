@@ -11,29 +11,41 @@ import UIKit
 public final class BookRecordsViewController: UIViewController {
 
     private let getBookRecordsUseCase: GetBookRecordsUseCase
+    private let saveBookRecordsUsecase: SaveBookRecordUseCase
+    private var bookRecords: [BookRecord] = []
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public init(getBookRecordsUseCase: GetBookRecordsUseCase) {
+    public init(
+        getBookRecordsUseCase: GetBookRecordsUseCase,
+        saveBookRecordUseCase: SaveBookRecordUseCase
+    ) {
         self.getBookRecordsUseCase = getBookRecordsUseCase
+        self.saveBookRecordsUsecase = saveBookRecordUseCase
         super.init(nibName: nil, bundle: nil)
     }
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        getBookRecordsUseCase.execute()
-        let label = UILabel()
-        label.text = "Hello, UIKit!"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
 
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
+        title = "Books"
+        view.backgroundColor = .white
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(didTapAddButton)
+        )
+
+        getBookRecordsUseCase.execute()
+    }
+
+    @objc
+    private func didTapAddButton() {
+        let newRecord = BookRecord(title: "Placeholder Title")
+        bookRecords.append(newRecord)
+        saveBookRecordsUsecase.execute(newRecord)
     }
 }

@@ -1,3 +1,3 @@
 public protocol GetBookRecordsUseCase {
-    func execute()
+    func execute() -> [BookRecord]
 }

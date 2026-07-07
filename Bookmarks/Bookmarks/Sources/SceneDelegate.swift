@@ -19,9 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-
         let rootVC = BookRecordsAssembly.makeRootViewController()
-        window?.rootViewController = rootVC
+        let nc = UINavigationController(rootViewController: rootVC)
+        window?.rootViewController = nc
         window?.makeKeyAndVisible()
     }
 }

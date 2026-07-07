@@ -1,4 +1,4 @@
-public struct GetBookRecordsUseCaseImpl: GetBookRecordsUseCase {
+public struct SaveBookRecordUseCaseImpl: SaveBookRecordUseCase {
 
     private let repository: BookRecordsRepository
 
@@ -8,7 +8,7 @@ public struct GetBookRecordsUseCaseImpl: GetBookRecordsUseCase {
         self.repository = repository
     }
 
-    public func execute() -> [BookRecord] {
-        repository.getBookRecords()
+    public func execute(_ bookRecord: BookRecord) {
+        repository.save(bookRecord)
     }
 }
